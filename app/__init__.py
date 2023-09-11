@@ -3,6 +3,9 @@ from flask_cors import CORS
 from config import Config
 
 
+from .routes.auth_bp import auth_bp
+
+
 from .routes.film_bp import film_bp
 
 from .database import DatabaseConnection
@@ -26,6 +29,10 @@ def init_app():
     app.register_blueprint(film_bp, url_prefix = '/films')
 
     app.register_blueprint(errors) #Agregado para el TP3.3
+
+
+
+    app.register_blueprint(auth_bp, url_prefix = '/auth')
 
 
     return app
