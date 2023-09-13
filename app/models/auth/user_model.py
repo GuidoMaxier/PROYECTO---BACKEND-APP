@@ -82,3 +82,92 @@ class User:
                 role_id = result[11]
             )
         return None
+    
+
+    # ESTA LINEAS SE AGREGARON PARA COMPLETAR EL CRUD
+
+
+    @classmethod
+    def create(cls, user):
+        """
+        Create a new user record in the database.
+
+        Args:
+            user (User): The User object containing user information.
+
+        Returns:
+            User: The created User object with the user_id assigned by the database.
+        """
+        query = """
+        INSERT INTO authentication_db.users (
+            username, password, email, first_name, last_name,
+            date_of_birth, phone_number, creation_date, last_login,
+            status_id, role_id
+        )
+        VALUES (
+            %(username)s, %(password)s, %(email)s, %(first_name)s, %(last_name)s,
+            %(date_of_birth)s, %(phone_number)s, %(creation_date)s, %(last_login)s,
+            %(status_id)s, %(role_id)s
+        )
+        RETURNING user_id
+        """
+        params = user.__dict__
+
+        # Execute the SQL query and get the newly created user_id
+        result = DatabaseConnection.fetch_one(query, params=params)
+
+        if result is not None:
+            user.user_id = result[0]
+            return user
+        return None
+
+
+
+    def update(self):
+        """
+        Update the user's information in the database.
+
+        Returns:
+            bool: True if the update was successful, False otherwise.
+        """
+        query = """
+        UPDATE authentication_db.users
+        SET
+            username = %(username)s,
+            password = %(password)s,
+            email = %(email)s,
+            first_name = %(first_name)s,
+            last_name = %(last_name)s,
+            date_of_birth = %(date_of_birth)s,
+            phone_number = %(phone_number)s,
+            last_login = %(last_login)s,
+            status_id = %(status_id)s,
+            role_id = %(role_id)s
+        WHERE user_id = %(user_id)s
+        """
+        params = self.__dict__
+
+        # Execute the SQL query to update the user's information
+        affected_rows = DatabaseConnection.execute(query, params=params)
+
+        return affected_rows > 0
+    
+    
+
+    def delete(self):
+        """
+        Delete the user's record from the database.
+
+        Returns:
+            bool: True if the deletion was successful, False otherwise.
+        """
+        query = """
+        DELETE FROM authentication_db.users
+        WHERE user_id = %(user_id)s
+        """
+        params = {"user_id": self.user_id}
+
+        # Execute the SQL query to delete the user's record
+        affected_rows = DatabaseConnection.execute(query, params=params)
+
+        return affected_rows > 0
