@@ -3,11 +3,21 @@ from .exceptions import FilmNotFound, InvalidDataError
 class Film:
     """Film model class"""
 
-    def __init__(self, film_id = None, title = None, description = None, 
-                 release_year = None, language_id = None, 
-                 original_language_id = None, rental_duration = None,
-                 rental_rate = None, length = None, replacement_cost = None,
-                 rating = None, special_features = None, last_update = None):
+    def __init__(self, film_id = None, 
+                 title = None, 
+                 description = None, 
+                 release_year = None, 
+                 language_id = None, 
+                 original_language_id = None, 
+                 rental_duration = None,
+                 rental_rate = None, 
+                 length = None, 
+                 replacement_cost = None,
+                 rating = None, 
+                 special_features = None, 
+                 last_update = None):
+        
+        
         """Constructor method"""
         self.film_id = film_id
         self.title = title
@@ -23,7 +33,6 @@ class Film:
         self.special_features = special_features
         self.last_update = last_update
 
-    
     def serialize(self):
         """Serialize object representation
         Returns:
@@ -56,7 +65,6 @@ class Film:
             "last_update": str(self.last_update)
         }
     
-    #EJERCICIO N° 1: http://127.0.0.1:5000/films/9009
     @classmethod
     def get(cls, film):
         """Get a film by id
@@ -76,9 +84,8 @@ class Film:
         if result is not None:
             return cls(*result)
         
-        raise FilmNotFound(film.film_id) 
-
-
+        raise FilmNotFound(film.film_id) #EJERCICIO N° 1
+    
     @classmethod
     def get_all(cls):
         """Get all films
@@ -96,9 +103,8 @@ class Film:
             for result in results:
                 films.append(cls(*result))
         return films
-    
 
-    #EJERCICIO N° 2
+
     @classmethod
     def create(cls, film):
         """Create a new film
@@ -110,10 +116,7 @@ class Film:
       
         """
 
-        # Validaciones de datos de entrada
-        if film.title == None or film.language_id == None or film.rental_duration == None or film.rental_rate == None or film.replacement_cost == None:
-            raise InvalidDataError("Mandatory information is missing.")
-            
+        # Validaciones de datos de entrada, EJERCICIO N° 2
         if len(film.title) < 3:
             raise InvalidDataError("Title must have at least three characters")
         
@@ -147,29 +150,20 @@ class Film:
             # Ejecutar la consulta SQL
             DatabaseConnection.execute_query(query, params=params)
         except Exception as e:
-            # Puedes manejar cualquier excepción de la base de datos
+            # Puedes manejar cualquier excepción de la base de datos aquí
             raise InvalidDataError("Failed to create film")
         
 
-    @classmethod
-    def exists(cls, film_id):
-        """Verificar si el ID de la película existe en la base de datos"""
-         
-        query = """SELECT COUNT(*) FROM sakila.film WHERE film_id = %s;"""
-        params = film_id,
-
-        result = DatabaseConnection.fetch_one(query, params=params)
-        
-        return result[0]
-    
+    def exists(self):
+        # Verificar si el ID de la película existe en la base de datos
+        return Film.query.filter_by(film_id=self.film_id).first() is not None    
 
     @classmethod
     def update(cls, film):
         """Update a film
         Args:
             - film (Film): Film object
-        """      
-
+        """
         allowed_columns = {'title', 'description', 'release_year',
                            'language_id', 'original_language_id',
                            'rental_duration', 'rental_rate', 'length',
