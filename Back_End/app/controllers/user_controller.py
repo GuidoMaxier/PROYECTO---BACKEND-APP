@@ -118,10 +118,11 @@ class UserController:
 
 
         if User.is_registered(user):
+            # session['username'] = data.get('username')
+            # return {"message": "Sesion iniciada"}, 200
             result = User.obtener_datos_del_usuario(user)
 
             if result is not None:
-
                 return result.serialize(), 200
 
             else:
@@ -134,13 +135,13 @@ class UserController:
     @classmethod
     def show_profile(cls):
 
-        user_nombre = session.get('user')
+        user_nombre = session.get('username')
 
         if user_nombre is None:
                 return {"message": "Usuario no encontrado user_nombre"}, 404
-        
+         
+        user = User.obtener_datos_del_usuario(User(username = user_nombre))
 
-        user = User.get(User(username = user_nombre))
         if user is None:
             return {"message": "Usuario no encontrado"}, 404
         else:

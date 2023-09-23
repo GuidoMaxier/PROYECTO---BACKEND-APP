@@ -11,6 +11,7 @@ user_bp = Blueprint('user_bp', __name__)
 user_bp.route('/<int:id_usuario>', methods=['GET'])(UserController.get)
 
 user_bp.route('/register2', methods=['POST'])(UserController.create)
+
 user_bp.route('/login2', methods=['POST'])(UserController.login)
 
 
