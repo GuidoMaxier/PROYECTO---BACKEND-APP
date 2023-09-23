@@ -23,4 +23,7 @@ user_bp.route('/<int:id_usuario>', methods=['PUT'])(UserController.update)
 user_bp.route('/<int:id_usuario>', methods=['DELETE'])(UserController.delete)
 
 
+user_bp.route('/cambiarclave', methods=['POST'])(UserController.cambiar_clave)
+
+
 

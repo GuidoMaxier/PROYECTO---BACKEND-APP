@@ -181,7 +181,29 @@ class User:
             # No se proporcionaron datos válidos para actualizar
             raise InvalidDataError("No se proporcionaron datos válidos para actualizar el usuario")
         
-            
+
+    @classmethod
+    def update_clave(cls, user_data):
+
+
+        # Verificar que el usuario exista y realizar el cambio de contraseña
+
+
+        # Generar el hash de la contraseña
+        hashed_password = generate_password_hash(user_data.contraseña, method='scrypt')
+
+        query = "UPDATE Discord2.usuarios SET contraseña = %s WHERE id_usuario = %s"
+
+        params = (hashed_password, user_data.id_usuario)
+
+        try:
+            DatabaseConnection.execute_query(query, params=params)
+        except Exception as e:
+            raise InvalidDataError("No se pudo crear actualizar la clave")
+        
+
+
+
     @classmethod
     def delete(cls, user_data):
             """Delete a user

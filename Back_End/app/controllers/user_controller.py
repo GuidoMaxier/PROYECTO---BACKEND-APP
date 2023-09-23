@@ -14,8 +14,6 @@ from flask_cors import cross_origin
 #from flask_session import Session
 
 
-
-
 class UserController:
     """Usuarios controller class"""
 
@@ -66,8 +64,6 @@ class UserController:
     @classmethod
     def update(cls, id_usuario):
         """Update a USER"""
-
-        print(request.json)
         
         data = request.json
 
@@ -156,6 +152,27 @@ class UserController:
         session.pop('username', None)
         return {"message": "Sesion cerrada"}, 200
     
+
+
+    
+
+    #@app.route('/cambiarclave', methods=['POST'])
+    @classmethod
+    def cambiar_clave(cls):
+        try:
+            data = request.json
+    
+
+            # TODO: Validate exists
+            user = User(**data)
+
+            User.update_clave(user)
+            
+            return jsonify({"message": "Contraseña cambiada exitosamente"}), 200
+
+        except Exception as e:
+            return jsonify({"error": "Error al cambiar la contraseña"}), 500
+        
  
 
 
