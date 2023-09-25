@@ -7,7 +7,7 @@ from ..controllers.servidor_controller import ServidorController
 servidor_bp = Blueprint('servidor_bp', __name__)
 
 
-servidor_bp.route('/all', methods=['GET'])(ServidorController.get_all)
+servidor_bp.route('/', methods=['GET'])(ServidorController.get_all)
 
 servidor_bp.route('/<int:id_servidor>', methods=['GET'])(ServidorController.get)
 
