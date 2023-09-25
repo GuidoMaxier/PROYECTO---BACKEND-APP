@@ -1,36 +1,36 @@
-/* Estilos CSS para replicar el aspecto de Discord */
+/* Estilos CSS para replicar el aspecto de Discord con estilo iOS */
 body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #36393f; /* Color de fondo similar a Discord */
+    background-color: #f0f0f0; /* Color de fondo similar a iOS */
 }
 
 .app {
     display: flex;
     height: 100vh;
-    background-color: #2f3136; /* Color de fondo de la aplicación */
+    background-color: #fff; /* Color de fondo de la aplicación similar a iOS */
 }
 
 .server-column, .channel-column, .chat-column {
     flex: 1;
     padding: 20px;
     overflow-y: auto;
-    color: #fff; /* Color del texto */
+    color: #333; /* Color de texto similar a iOS */
 }
 
 .server-column {
-    background-color: #202225; /* Color de fondo de la columna de servidores */
+    background-color: #e5e5e5; /* Color de fondo de la columna de servidores similar a iOS */
     max-width: 100px;
 }
 
 .channel-column {
-    background-color: #36393f; /* Color de fondo de la columna de canales */
+    background-color: #f0f0f0; /* Color de fondo de la columna de canales similar a iOS */
     max-width: 150px;
 }
 
 .chat-column {
-    background-color: #292b2f; /* Color de fondo de la columna de chat */
+    background-color: #ffffff; /* Color de fondo de la columna de chat similar a iOS */
 }
 
 /* Estilos para los elementos de lista (servidores, canales y mensajes) */
@@ -45,12 +45,12 @@ body {
 }
 
 .server:hover, .channel:hover {
-    background-color: #40444b; /* Cambia el color al pasar el mouse */
+    background-color: #e0e0e0; /* Cambia el color al pasar el mouse similar a iOS */
 }
 
 /* Estilos para el nombre del servidor y del canal */
 .server-name, .channel-name {
-    color: #fff;
+    color: #333; /* Color de texto similar a iOS */
     font-weight: bold;
     margin: 0;
     padding: 10px;
@@ -58,7 +58,7 @@ body {
 
 /* Estilos para el nombre de usuario */
 .user-name {
-    color: #8e9297; /* Color de texto más claro */
+    color: #888; /* Color de texto más claro similar a iOS */
     font-size: 14px;
     margin-left: 10px;
 }
@@ -69,15 +69,10 @@ body {
 }
 
 .user {
-    color: #7289da; /* Color de texto para nombres de usuario */
+    color: #007aff; /* Color de texto para nombres de usuario similar a iOS */
     font-weight: bold;
     margin-right: 5px;
 }
-
-/* Agrega más estilos según sea necesario */
-
-
-
 
 /* Estilo para las ventanas modales */
 .modal {
@@ -86,18 +81,18 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(30, 0, 200, 0.466); /* Fondo semi-transparente */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente similar a iOS */
     z-index: 100; /* Asegura que esté en primer plano */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
-    color: #fff;
+    color: #333; /* Color de texto similar a iOS */
 }
 
 /* Estilo para el contenido de la ventana modal */
 .modal-content {
-    background-color: #2f3135;
+    background-color: #f0f0f0; /* Color de fondo del contenido similar a iOS */
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
@@ -110,13 +105,13 @@ body {
     right: 10px;
     font-size: 20px;
     cursor: pointer;
-    color: #fff;
+    color: #333; /* Color de texto similar a iOS */
 }
 
 /* Estilo para los botones de las ventanas modales */
 button {
-    background-color: #7289da;
-    color: #fff;
+    background-color: #007aff; /* Color de botones similar a iOS */
+    color: #fff; /* Color de texto en botones similar a iOS */
     border: none;
     padding: 10px 20px;
     margin-top: 10px;
@@ -126,8 +121,8 @@ button {
 
 /* Estilo para los botones de los botones de crear servidor y canal */
 #create-server, #create-channel {
-    background-color: #7289da;
-    color: #fff;
+    background-color: #007aff; /* Color de botones similar a iOS */
+    color: #fff; /* Color de texto en botones similar a iOS */
     border: none;
     padding: 10px 20px;
     margin-top: 10px;
@@ -140,27 +135,16 @@ input[type="text"] {
     padding: 10px;
     margin-top: 10px;
     border-radius: 5px;
-    border: none;
+    border: 1px solid #ccc; /* Borde similar a iOS */
 }
 
 /* Estilo para el botón de enviar mensaje en la columna de chat */
 #send-message {
-    background-color: #7289da;
-    color: #fff;
+    background-color: #007aff; /* Color de botón similar a iOS */
+    color: #fff; /* Color de texto en botón similar a iOS */
     border: none;
     padding: 10px 20px;
     margin-top: 10px;
     cursor: pointer;
     border-radius: 5px;
 }
-
-/* Estilo para los elementos de la ventana modal */
-.modal h2 {
-    margin-top: 0;
-}
-
-/* Estilo para los elementos de la ventana modal */
-.modal-content h2 {
-    margin-top: 0;
-}
-
