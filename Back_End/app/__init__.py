@@ -6,7 +6,11 @@ from flask_socketio import SocketIO #Chat
 
 
 from .routes.film_bp import film_bp
+
 from .routes.user_bp import user_bp #profile_bp, auth_bp
+from .routes.servidor_bp import servidor_bp
+
+
 from .database import DatabaseConnection
 from .routes.error_handlers import errors 
 
@@ -35,6 +39,8 @@ def init_app():
     app.register_blueprint(user_bp)
 
     app.register_blueprint(errors) #Agregado
+
+    app.register_blueprint(servidor_bp)
 
     # Registra los Blueprints con las rutas correspondientes
     # app.register_blueprint(auth_bp)

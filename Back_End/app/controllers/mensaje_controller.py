@@ -19,8 +19,6 @@ class MensajeController:
         if result is not None:
             return result.serialize(), 200
 
-
-
         
     @classmethod
     def get_all(cls):
