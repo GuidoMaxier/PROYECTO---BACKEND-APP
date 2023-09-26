@@ -1,7 +1,7 @@
 from flask import Flask, request, session, jsonify
 from flask_cors import CORS
 from config import Config
-from flask_socketio import SocketIO #Chat
+# from flask_socketio import SocketIO #Chat
 
 
 

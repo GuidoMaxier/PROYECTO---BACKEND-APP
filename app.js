@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         chatMessages.appendChild(mensaje);
     }
 
+    //obtenemos lo mensajes de la base de datos falsa
     function obtenerMensajes() {
         fetch(`${apiUrl}/mensajes`)
             .then(response => response.json())
