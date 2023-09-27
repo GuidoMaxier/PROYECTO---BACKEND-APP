@@ -33,6 +33,10 @@ class Servidor:
             "descripcion": self.descripcion,
             "fecha_creacion": str(self.fecha_creacion)
         }
+    
+
+
+
 
 
 
@@ -46,7 +50,7 @@ class Servidor:
         """
 
         query = """SELECT id_servidor, nombre, descripcion, fecha_creacion
-        FROM discord2.servidor WHERE id_servidores = %s"""
+        FROM discord2.servidores WHERE id_servidor = %s"""
 
         params = servidor_data.id_servidor,
         result = DatabaseConnection.fetch_one(query, params=params)
@@ -85,31 +89,17 @@ class Servidor:
             - InvalidDataError: If input data is not valid
       
         """
-
-        # Validaciones de datos de entrada, EJERCICIO N° 2
-        # if len(film.title) < 3:
-        #     raise InvalidDataError("Title must have at least three characters")
-        
-        # if not isinstance(film.language_id, int) or not isinstance(film.rental_duration, int):
-        #     raise InvalidDataError("Invalid data types for some attributes")
-        
-        # if film.special_features is not None and (not isinstance(film.special_features, list) \
-        #         or not all(isinstance(feature, str) for feature in film.special_features) \
-        #         or not all(feature in ["Trailers", "Commentaries", "Deleted Scenes", "Behind the Scenes"]
-        #                     for feature in film.special_features)):
-        #     raise InvalidDataError("Invalid special features")
-       
-        
+          
         # Construir la consulta SQL
         query = """INSERT INTO discord2.servidores (nombre, descripcion, fecha_creacion) 
-        VALUES (%s, %s, %s, %s)"""
+        VALUES (%s, %s, %s)"""
         
         # if film.special_features is not None:
         #     special_features = ','.join(film.special_features)
         # else:
         #     special_features = None
 
-        params = (servidor_data.id_servidor, servidor_data.descripcion, servidor_data.fecha_creacion)
+        params = (servidor_data.nombre, servidor_data.descripcion, servidor_data.fecha_creacion)
         
         try:
             # Ejecutar la consulta SQL
@@ -119,9 +109,9 @@ class Servidor:
             raise InvalidDataError("Failed to create servidor")
         
 
-    def exists(self):
-        # Verificar si el ID de la película existe en la base de datos
-        return Servidor.query.filter_by(servidor_id=self.id_servidor).first() is not None    
+    # def exists(self):
+    #     # Verificar si el ID de la película existe en la base de datos
+    #     return Servidor.query.filter_by(servidor_id=self.id_servidor).first() is not None    
 
     @classmethod
     def update(cls, servidor_data):
@@ -158,3 +148,47 @@ class Servidor:
         query = "DELETE FROM discord2.servidores WHERE id_servidor = %s"
         params = servidor_data.id_servidor,
         DatabaseConnection.execute_query(query, params=params)
+
+
+    # @classmethod
+    # def check_username(cls, nombre):
+    #     """Cheamos diponibilidad del usermane"""
+    #     query = "SELECT id_usuario FROM Discord2.servidores WHERE nombre=%s"
+    #     params = (nombre,)
+    #     result = DatabaseConnection.fetch_one(query, params=params)
+        
+    #     return result  
+
+    @classmethod
+    def check_nombre(cls, nombre):
+        """verificamos que el nombre del servidor no este en uso"""
+        
+        query = "SELECT id_servidor FROM discord2.servidores WHERE nombre = %s"
+        params = (nombre,)
+        result = DatabaseConnection.fetch_one(query, params=params)
+    
+        return result
+    
+
+    @classmethod
+    def get_filter(cls, id_usuario):
+        """Filter get id_usuario
+        Returns:
+            - list: List of Servidor objects
+        """
+        query = """
+                SELECT S.id_servidor, S.nombre, S.descripcion, S.fecha_creacion
+                FROM discord2.Servidores S
+                JOIN discord2.Usuario_Servidor US ON S.id_servidor = US.servidor_id
+                WHERE US.usuario_id = %s"""
+        
+        params = (id_usuario,)
+
+        results = DatabaseConnection.fetch_all(query, params=params)
+
+        servidores = []
+        if results is not None:
+            for result in results:
+                servidores.append(cls(*result))
+        return servidores
+    

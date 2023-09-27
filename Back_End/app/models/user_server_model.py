@@ -101,13 +101,10 @@ class UserServer:
        
         
         # Construir la consulta SQL
-        query = """INSERT INTO discord2.usuario_servidor (usuario_id, servidor_id, rol,
+        query = """INSERT INTO discord2.usuario_servidor (usuario_id, servidor_id, rol)
         VALUES (%s, %s, %s)"""
         
-        # if film.special_features is not None:
-        #     special_features = ','.join(film.special_features)
-        # else:
-        #     special_features = None
+
 
         params = userserver.usuario_id, userserver.servidor_id, userserver.rol
         
@@ -116,7 +113,7 @@ class UserServer:
             DatabaseConnection.execute_query(query, params=params)
         except Exception as e:
             # Puedes manejar cualquier excepción de la base de datos aquí
-            raise InvalidDataError("Failed to create film")
+            raise InvalidDataError("Failed to create tabla Usuario servidor")
         
 
     # def exists(self):

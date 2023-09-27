@@ -17,3 +17,5 @@ servidor_bp.route('/<int:id_servidor>', methods=['PUT'])(ServidorController.upda
 
 servidor_bp.route('/<int:id_servidor>', methods=['DELETE'])(ServidorController.delete)
 
+servidor_bp.route('/user/<int:id_usuario>', methods=['GET'])(ServidorController.get_filter)
+

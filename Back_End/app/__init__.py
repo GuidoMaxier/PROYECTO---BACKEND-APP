@@ -25,7 +25,7 @@ def init_app():
 
    # CORS(app, resources={r"/socket.io/*": {"origins": "*"}})
   
-    CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
+    CORS(app, supports_credentials=True)
    
 
     app.config.from_object(
@@ -42,6 +42,7 @@ def init_app():
     app.register_blueprint(errors) #Agregado
 
     app.register_blueprint(servidor_bp, url_prefix = '/servidor')
+
     app.register_blueprint(userserver_bp , url_prefix = '/userserver')
 
     # Registra los Blueprints con las rutas correspondientes
@@ -51,6 +52,10 @@ def init_app():
 
     # Lista para almacenar los mensajes (simula una base de datos)
     # db_mensajes = []
+
+
+
+
 
     db_mensajes = [
         {'usuario': 'Usuario1', 'mensaje': '¡Hola!'},
