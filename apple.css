@@ -1,0 +1,56 @@
+/* Estilo para el cuerpo de la página */
+body {
+    font-family: "San Francisco", sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Contenedor del formulario de inicio de sesión */
+.login-container {
+    text-align: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo del logo de Apple */
+.apple-logo {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 20px;
+}
+
+/* Estilo de los campos de entrada y etiquetas */
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Estilo del botón de inicio de sesión */
+button {
+    background-color: #0070c9;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #005a9e;
+}
