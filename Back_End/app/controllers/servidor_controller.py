@@ -73,7 +73,7 @@ class ServidorController:
 
         # Registrar la relación en la tabla intermedia "Usuario_Servidor"
         usuario_id = data['id_usuario']
-        rol = data['rol']
+        rol = 'Admin'
         usuario_servidor = UserServer(usuario_id=usuario_id, servidor_id=servidor_id[0], rol=rol)
         UserServer.create(usuario_servidor)
 
