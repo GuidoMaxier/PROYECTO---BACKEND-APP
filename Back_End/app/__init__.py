@@ -54,9 +54,6 @@ def init_app():
     # db_mensajes = []
 
 
-
-
-
     db_mensajes = [
         {'usuario': 'Usuario1', 'mensaje': '¡Hola!'},
         {'usuario': 'Usuario2', 'mensaje': 'Hola, ¿cómo estás?'},
