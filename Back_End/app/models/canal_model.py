@@ -1,5 +1,7 @@
 from ..database import DatabaseConnection
 from .exceptions import FilmNotFound, InvalidDataError
+
+
 class Canal:
     """Canal model class"""
 
@@ -153,3 +155,59 @@ class Canal:
         query = "DELETE FROM discord2.canales WHERE id_canal = %s"
         params = canal_data.id_canal,
         DatabaseConnection.execute_query(query, params=params)
+
+
+    @classmethod
+    def check_nombre(cls, nombre):
+        """verificamos que el nombre del servidor no este en uso"""
+        
+        query = "SELECT id_canal FROM discord2.canales WHERE nombre = %s"
+        params = (nombre,)
+        result = DatabaseConnection.fetch_one(query, params=params)
+    
+        return result
+    
+
+    @classmethod
+    def get_by_id_server(cls, id_servidor):
+        """Filter get id_usuario
+        Returns:
+            - list: List of Servidor objects
+        """
+        query = """
+               SELECT *
+                FROM discord2.Canales
+                WHERE servidor_id = %s"""
+        
+        params = (id_servidor,)
+
+        results = DatabaseConnection.fetch_all(query, params=params)
+
+        canales = []
+        if results is not None:
+            for result in results:
+                canales.append(cls(*result))
+        return canales
+        
+
+    @classmethod
+    def get_by_name_server(cls, nombre):
+        """Filter get id_usuario
+        Returns:
+            - list: List of Servidor objects
+        """
+        query = """
+               SELECT Canales.*
+                FROM discord2.Canales
+                INNER JOIN Servidores ON Canales.servidor_id = Servidores.id_servidor
+                WHERE Servidores.nombre = %s"""
+        
+        params = (nombre,)
+
+        results = DatabaseConnection.fetch_all(query, params=params)
+
+        canales = []
+        if results is not None:
+            for result in results:
+                canales.append(cls(*result))
+        return canales    

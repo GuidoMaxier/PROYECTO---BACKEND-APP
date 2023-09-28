@@ -9,6 +9,7 @@ from .routes.film_bp import film_bp
 
 from .routes.user_bp import user_bp #profile_bp, auth_bp
 from .routes.servidor_bp import servidor_bp
+from .routes.canal_bp import canal_bp
 from .routes.usuario_servidor_bp import userserver_bp 
 
 
@@ -42,6 +43,8 @@ def init_app():
     app.register_blueprint(errors) #Agregado
 
     app.register_blueprint(servidor_bp, url_prefix = '/servidor')
+
+    app.register_blueprint(canal_bp, url_prefix = '/canal')
 
     app.register_blueprint(userserver_bp , url_prefix = '/userserver')
 

@@ -76,3 +76,21 @@ class CanalController:
         # TODO: Validate canal exists
         Canal.delete(canal)
         return {'message': 'Canal deleted successfully'}, 204
+    
+    @classmethod
+    def get_by_id_server(cls, id_servidor):
+        """Get filter canales"""
+        canal_objects = Canal.get_by_id_server(id_servidor=id_servidor)
+        canales = []
+        for canal in canal_objects:
+            canales.append(canal.serialize())
+        return canales, 200
+    
+    @classmethod
+    def get_by_name_server(cls, nombre):
+        """Get filter canales"""
+        canal_objects = Canal.get_by_name_server(nombre=nombre)
+        canales = []
+        for canal in canal_objects:
+            canales.append(canal.serialize())
+        return canales, 200
