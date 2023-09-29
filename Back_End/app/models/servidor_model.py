@@ -189,6 +189,9 @@ class Servidor:
         servidores = []
         if results is not None:
             for result in results:
-                servidores.append(cls(*result))
-        return servidores
+                servidores.append(cls(*result))    
+            return servidores
+        
+        else:
+            return {'message': 'Error al hacer el filter del servidores'}
     

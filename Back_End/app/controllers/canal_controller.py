@@ -1,6 +1,6 @@
 from ..models.canal_model import Canal
 
-from flask import request
+from flask import request,jsonify
 
 
 
@@ -29,22 +29,24 @@ class CanalController:
             canales.append(canal.serialize())
         return canales, 200
     
+
+
     @classmethod
     def create(cls):
         """Create a new canale"""
         data = request.json
-        # TODO: Validate data
-        # if data.get('rental_rate') is not None:
-        #     if isinstance(data.get('rental_rate'), int):
-        #         data['rental_rate'] = Decimal(data.get('rental_rate'))/100
+        # Verificar si ya existe un servidor con el mismo nombre
+        if Canal.check_nombre(data['nombre']):
+            return jsonify({'message': 'El nombre del canal ya está en uso en este servidor'}), 400
         
-        # if data.get('replacement_cost') is not None:
-        #     if isinstance(data.get('replacement_cost'), int):
-        #         data['replacement_cost'] = Decimal(data.get('replacement_cost'))/100
+        nombre = data['nombre']
+        servidor_id = data['servidor_id']
 
-        canal = Canal(**data)
+        canal = Canal(nombre=nombre, servidor_id=servidor_id)
         Canal.create(canal)
         return {'message': 'Canal created successfully'}, 201
+ 
+
 
 
     @classmethod
