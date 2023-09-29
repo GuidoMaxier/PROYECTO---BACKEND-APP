@@ -39,9 +39,6 @@ class MensajeController:
         #     if isinstance(data.get('rental_rate'), int):
         #         data['rental_rate'] = Decimal(data.get('rental_rate'))/100
         
-        # if data.get('replacement_cost') is not None:
-        #     if isinstance(data.get('replacement_cost'), int):
-        #         data['replacement_cost'] = Decimal(data.get('replacement_cost'))/100
 
         mensaje = Mensaje(**data)
         Mensaje.create(mensaje)
@@ -86,28 +83,5 @@ class MensajeController:
         return mensajes, 200
     
 
-
+   
     
-    # db_mensajes = [
-    #     {'usuario': 'Usuario1', 'mensaje': '¡Hola!'},
-    #     {'usuario': 'Usuario2', 'mensaje': 'Hola, ¿cómo estás?'},
-    #     {'usuario': 'Usuario1', 'mensaje': 'Estoy bien, gracias.'},
-    #     {'usuario': 'Usuario2', 'mensaje': 'Eso es genial.'},
-    # ]
-    
-    
-    
-    # @classmethod
-    # def enviar_mensaje(cls):
-    #     # data = request.get_json()
-    #     data = request.json
-
-    #     mensaje = data['mensaje']
-    #     usuario = data['usuario']
-
-    #     print("mensaje chat", mensaje)
-
-    #     # Agregar el mensaje a la lista (simulado)
-    #     db_mensajes.append({'usuario': usuario, 'mensaje': mensaje})
-
-    #     return jsonify({"mensaje": "Mensaje enviado con éxito"})

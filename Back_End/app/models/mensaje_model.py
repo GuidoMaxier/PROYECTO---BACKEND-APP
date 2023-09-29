@@ -87,8 +87,6 @@ class Mensaje:
         # Construir la consulta SQL
         query = """INSERT INTO discord2.mensajes (canal_id, usuario_id, contenido, fecha) 
         VALUES (%s, %s, %s, %s)"""
-        
-  
 
         params = mensaje.canal_id, mensaje.usuario_id, mensaje.contenido, mensaje.fecha
    
@@ -156,6 +154,9 @@ class Mensaje:
             for result in results:
                 mensajes.append(cls(*result))
         return mensajes
+    
+
+
     
 
     #url avatar, username, fecha, mensaje

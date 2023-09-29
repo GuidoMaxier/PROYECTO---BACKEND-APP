@@ -1,8 +1,6 @@
 from flask import Flask, request, session, jsonify
 from flask_cors import CORS
 from config import Config
-# from flask_socketio import SocketIO #Chat
-
 
 
 from .routes.user_bp import user_bp #profile_bp, auth_bp
@@ -52,32 +50,6 @@ def init_app():
     # app.register_blueprint(auth_bp)
     # app.register_blueprint(profile_bp)
 
-
-
-    db_mensajes = [
-        {'usuario': 'Usuario1', 'mensaje': '¡Hola!'},
-        {'usuario': 'Usuario2', 'mensaje': 'Hola, ¿cómo estás?'},
-        {'usuario': 'Usuario1', 'mensaje': 'Estoy bien, gracias.'},
-        {'usuario': 'Usuario2', 'mensaje': 'Eso es genial.'},
-    ]
-    
-
-    @app.route('/api/enviar_mensaje', methods=['POST'])
-    def enviar_mensaje():
-        data = request.get_json()
-        mensaje = data['mensaje']
-        usuario = data['usuario']
-
-        print("mensaje chat", mensaje)
-
-        # Agregar el mensaje a la lista (simulado)
-        db_mensajes.append({'usuario': usuario, 'mensaje': mensaje})
-
-        return jsonify({"mensaje": "Mensaje enviado con éxito"})
-
-    @app.route('/api/mensajes', methods=['GET'])
-    def obtener_mensajes():
-        return jsonify(db_mensajes)
 
 
     return app
