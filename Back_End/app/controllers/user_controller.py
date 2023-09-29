@@ -6,7 +6,7 @@ from flask import Flask, request, session, jsonify
 from decimal import Decimal
 
 
-from ..routes.error_handlers import handle_film_not_found
+from ..routes.error_handlers import handle_not_found
 
 
 from flask_cors import cross_origin 
@@ -85,7 +85,7 @@ class UserController:
 
         user = User(**data)
 
-        # TODO: Validate film exists
+        # TODO: Validate exists
         User.update(user)
         return {'message': 'USER updated successfully'}, 200
     

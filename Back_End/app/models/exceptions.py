@@ -20,9 +20,9 @@ class CustomException(Exception):
         return response
     
 #EJERCICIO 1
-class FilmNotFound(CustomException):
-    def __init__(self, film_id):
-        super().__init__(status_code=404, name="Film Not Found", description=f"Film with id {film_id} not found")
+class NotFound(CustomException):
+    def __init__(self, id):
+        super().__init__(status_code=404, name="Not Found", description=f"id {id} not found")
 
 
 #EJERCICIO 2

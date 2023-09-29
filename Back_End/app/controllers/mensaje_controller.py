@@ -1,14 +1,14 @@
 from ..models.mensaje_model import Mensaje
 
-from flask import request
+from flask import request, jsonify
 
 
-from ..routes.error_handlers import handle_film_not_found
+from ..routes.error_handlers import handle_not_found
 
 
 
 class MensajeController:
-    """Film controller class"""
+    """Mensaje controller class"""
 
     @classmethod
     def get(cls, id_mensaje):
@@ -53,9 +53,6 @@ class MensajeController:
         """Update a mensaje"""
         data = request.json
         # TODO: Validate data
-        # if data.get('rental_rate') is not None:
-        #     if isinstance(data.get('rental_rate'), int):
-        #         data['rental_rate'] = Decimal(data.get('rental_rate'))/100
         
         # if data.get('replacement_cost') is not None:
         #     if isinstance(data.get('replacement_cost'), int):
@@ -65,7 +62,7 @@ class MensajeController:
 
         mensaje = Mensaje(**data)
 
-        # TODO: Validate film exists
+        # TODO: Validate  exists
         Mensaje.update(mensaje)
         return {'message': 'Mensaje updated successfully'}, 200
     
@@ -74,6 +71,43 @@ class MensajeController:
         """Delete a mensaje"""
         mensaje = Mensaje(id_mensaje=id_mensaje)
 
-        # TODO: Validate film exists
+        # TODO: Validate  exists
         Mensaje.delete(mensaje)
         return {'message': 'Mensaje deleted successfully'}, 204
+    
+
+    @classmethod
+    def get_by_id_canal(cls, id_canal):
+        """Get filter mensajes"""
+        mensaje_objects = Mensaje.get_by_id_canal(id_canal=id_canal)
+        mensajes = []
+        for mensaje in mensaje_objects:
+            mensajes.append(mensaje.serialize())
+        return mensajes, 200
+    
+
+
+    
+    # db_mensajes = [
+    #     {'usuario': 'Usuario1', 'mensaje': '¡Hola!'},
+    #     {'usuario': 'Usuario2', 'mensaje': 'Hola, ¿cómo estás?'},
+    #     {'usuario': 'Usuario1', 'mensaje': 'Estoy bien, gracias.'},
+    #     {'usuario': 'Usuario2', 'mensaje': 'Eso es genial.'},
+    # ]
+    
+    
+    
+    # @classmethod
+    # def enviar_mensaje(cls):
+    #     # data = request.get_json()
+    #     data = request.json
+
+    #     mensaje = data['mensaje']
+    #     usuario = data['usuario']
+
+    #     print("mensaje chat", mensaje)
+
+    #     # Agregar el mensaje a la lista (simulado)
+    #     db_mensajes.append({'usuario': usuario, 'mensaje': mensaje})
+
+    #     return jsonify({"mensaje": "Mensaje enviado con éxito"})

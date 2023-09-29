@@ -5,7 +5,7 @@ from flask import request
 from decimal import Decimal
 
 
-from ..routes.error_handlers import handle_film_not_found
+from ..routes.error_handlers import handle_not_found
 
 
 
@@ -68,7 +68,7 @@ class UserServerController:
 
         userserver = UserServer(**data)
 
-        # TODO: Validate film exists
+        # TODO: Validate  exists
         UserServer.update(userserver)
         return {'message': 'User_Server updated successfully'}, 200
     
@@ -77,6 +77,6 @@ class UserServerController:
         """Delete a userserver"""
         userserver = UserServer(id=id)
 
-        # TODO: Validate film exists
+        # TODO: Validate exists
         UserServer.delete(userserver)
         return {'message': 'User_Server deleted successfully'}, 204

@@ -97,7 +97,7 @@ class ServidorController:
 
         servidor = Servidor(**data)
 
-        # TODO: Validate film exists
+        # TODO: Validate exists
         Servidor.update(servidor)
         return {'message': 'Servidor updated successfully'}, 200
     
@@ -106,7 +106,7 @@ class ServidorController:
         """Delete a servidor"""
         servidor = Servidor(id_servidor=id_servidor)
 
-        # TODO: Validate film exists
+        # TODO: Validate exists
         Servidor.delete(servidor)
         return {'message': 'Servidor deleted successfully'}, 204
     

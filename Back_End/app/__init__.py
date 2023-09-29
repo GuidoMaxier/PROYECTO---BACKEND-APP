@@ -5,12 +5,11 @@ from config import Config
 
 
 
-from .routes.film_bp import film_bp
-
 from .routes.user_bp import user_bp #profile_bp, auth_bp
 from .routes.servidor_bp import servidor_bp
 from .routes.canal_bp import canal_bp
 from .routes.usuario_servidor_bp import userserver_bp 
+from .routes.mensaje_bp import mensaje_bp
 
 
 from .database import DatabaseConnection
@@ -36,7 +35,6 @@ def init_app():
 
     DatabaseConnection.set_config(app.config)
 
-    # app.register_blueprint(film_bp, url_prefix = '/films')
 
     app.register_blueprint(user_bp)
 
@@ -48,13 +46,12 @@ def init_app():
 
     app.register_blueprint(userserver_bp , url_prefix = '/userserver')
 
+    app.register_blueprint(mensaje_bp , url_prefix = '/mensaje')
+
     # Registra los Blueprints con las rutas correspondientes
     # app.register_blueprint(auth_bp)
     # app.register_blueprint(profile_bp)
 
-
-    # Lista para almacenar los mensajes (simula una base de datos)
-    # db_mensajes = []
 
 
     db_mensajes = [

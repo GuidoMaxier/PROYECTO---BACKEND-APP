@@ -1,5 +1,5 @@
 from ..database import DatabaseConnection
-from .exceptions import FilmNotFound, InvalidDataError
+from .exceptions import NotFound, InvalidDataError
 
 
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -60,7 +60,7 @@ class User:
     def get(cls, user_data):
         """Get a user by id
         Args:
-            - user (Film): User object with the id attribute
+            - user (User): User object with the id attribute
         Returns:
             - User: User object
         """
@@ -72,7 +72,7 @@ class User:
         if result is not None:
             return cls(*result)
 
-        raise FilmNotFound(user_data.id_usuario)
+        raise NotFound(user_data.id_usuario)
     
 
     @classmethod
@@ -88,7 +88,7 @@ class User:
         if result is not None:
             return cls(*result)
         
-        raise FilmNotFound(user_data.id_usuario) #controlar esta salida
+        raise NotFound(user_data.id_usuario) #controlar esta salida
 
   
 

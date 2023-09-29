@@ -66,7 +66,7 @@ class CanalController:
 
         canal = Canal(**data)
 
-        # TODO: Validate film exists
+        # TODO: Validate exists
         Canal.update(canal)
         return {'message': 'Canal updated successfully'}, 200
     
@@ -79,6 +79,7 @@ class CanalController:
         Canal.delete(canal)
         return {'message': 'Canal deleted successfully'}, 204
     
+    
     @classmethod
     def get_by_id_server(cls, id_servidor):
         """Get filter canales"""
@@ -88,11 +89,14 @@ class CanalController:
             canales.append(canal.serialize())
         return canales, 200
     
-    @classmethod
-    def get_by_name_server(cls, nombre):
-        """Get filter canales"""
-        canal_objects = Canal.get_by_name_server(nombre=nombre)
-        canales = []
-        for canal in canal_objects:
-            canales.append(canal.serialize())
-        return canales, 200
+
+
+    
+    # @classmethod
+    # def get_by_name_server(cls, nombre):
+    #     """Get filter canales"""
+    #     canal_objects = Canal.get_by_name_server(nombre=nombre)
+    #     canales = []
+    #     for canal in canal_objects:
+    #         canales.append(canal.serialize())
+    #     return canales, 200

@@ -19,4 +19,4 @@ canal_bp.route('/<int:id_canal>', methods=['DELETE'])(CanalController.delete)
 
 canal_bp.route('/server/<int:id_servidor>', methods=['GET'])(CanalController.get_by_id_server)
 
-canal_bp.route('/server/name/<string:nombre>', methods=['GET'])(CanalController.get_by_name_server)
+

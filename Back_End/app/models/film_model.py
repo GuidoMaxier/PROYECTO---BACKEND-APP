@@ -1,5 +1,5 @@
 from ..database import DatabaseConnection
-from .exceptions import FilmNotFound, InvalidDataError
+from .exceptions import NotFound, InvalidDataError
 class Film:
     """Film model class"""
 

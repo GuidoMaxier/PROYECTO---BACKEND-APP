@@ -1,5 +1,5 @@
 from ..database import DatabaseConnection
-from .exceptions import FilmNotFound, InvalidDataError
+from .exceptions import NotFound, InvalidDataError
 
 
 class Servidor:
@@ -44,7 +44,7 @@ class Servidor:
     def get(cls, servidor_data):
         """Get a servidor by id
         Args:
-            - servidor (Servidor): Film object with the id attribute
+            - servidor (Servidor): Servidor object with the id attribute
         Returns:
             - Servidor: Servidor object
         """
@@ -58,7 +58,7 @@ class Servidor:
         if result is not None:
             return cls(*result)
         
-        raise FilmNotFound(servidor_data.id_servidor) #servidor
+        raise NotFound(servidor_data.id_servidor) #servidor
     
     
     @classmethod
@@ -81,9 +81,9 @@ class Servidor:
 
     @classmethod
     def create(cls, servidor_data):
-        """Create a new film
+        """Create a new servidor
         Args:
-            - servidor (Servidor): Film object
+            - servidor (Servidor): Servidor object
 
         Raises:
             - InvalidDataError: If input data is not valid
@@ -94,10 +94,6 @@ class Servidor:
         query = """INSERT INTO discord2.servidores (nombre, descripcion, fecha_creacion) 
         VALUES (%s, %s, %s)"""
         
-        # if film.special_features is not None:
-        #     special_features = ','.join(film.special_features)
-        # else:
-        #     special_features = None
 
         params = (servidor_data.nombre, servidor_data.descripcion, servidor_data.fecha_creacion)
         
@@ -143,7 +139,7 @@ class Servidor:
     def delete(cls, servidor_data):
         """Delete a servidor
         Args:
-            - servidor(Servidor): Film object with the id attribute
+            - servidor(Servidor): Servidor object with the id attribute
         """
         query = "DELETE FROM discord2.servidores WHERE id_servidor = %s"
         params = servidor_data.id_servidor,

@@ -1,5 +1,5 @@
 from ..database import DatabaseConnection
-from .exceptions import FilmNotFound, InvalidDataError
+from .exceptions import NotFound, InvalidDataError
 
 
 class Canal:
@@ -38,7 +38,7 @@ class Canal:
     def get(cls, canal_data):
         """Get a canal by id
         Args:
-            - canal (Canal): Film object with the id attribute
+            - canal (Canal): Mensaje object with the id attribute
         Returns:
             - Canal: Canal object
         """
@@ -52,12 +52,12 @@ class Canal:
         if result is not None:
             return cls(*result)
         
-        raise FilmNotFound(canal_data.id_canal) #CANAL
+        raise NotFound(canal_data.id_canal) #CANAL
     
     
     @classmethod
     def get_all(cls):
-        """Get all films
+        """Get all canals
         Returns:
             - list: List of Canal objects
         """
@@ -65,11 +65,11 @@ class Canal:
         FROM discord2.canales"""
         results = DatabaseConnection.fetch_all(query)
 
-        films = []
+        canales = []
         if results is not None:
             for result in results:
-                films.append(cls(*result))
-        return films
+                canales.append(cls(*result))
+        return canales
 
 
     @classmethod
@@ -190,24 +190,24 @@ class Canal:
         return canales
         
 
-    @classmethod
-    def get_by_name_server(cls, nombre):
-        """Filter get id_usuario
-        Returns:
-            - list: List of Servidor objects
-        """
-        query = """
-               SELECT Canales.*
-                FROM discord2.Canales
-                INNER JOIN Servidores ON Canales.servidor_id = Servidores.id_servidor
-                WHERE Servidores.nombre = %s"""
+    # @classmethod
+    # def get_by_name_server(cls, nombre):
+    #     """Filter get id_usuario
+    #     Returns:
+    #         - list: List of Servidor objects
+    #     """
+    #     query = """
+    #            SELECT Canales.*
+    #             FROM discord2.Canales
+    #             INNER JOIN Servidores ON Canales.servidor_id = Servidores.id_servidor
+    #             WHERE Servidores.nombre = %s"""
         
-        params = (nombre,)
+    #     params = (nombre,)
 
-        results = DatabaseConnection.fetch_all(query, params=params)
+    #     results = DatabaseConnection.fetch_all(query, params=params)
 
-        canales = []
-        if results is not None:
-            for result in results:
-                canales.append(cls(*result))
-        return canales    
+    #     canales = []
+    #     if results is not None:
+    #         for result in results:
+    #             canales.append(cls(*result))
+    #     return canales    

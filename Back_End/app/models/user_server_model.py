@@ -1,5 +1,5 @@
 from ..database import DatabaseConnection
-from .exceptions import FilmNotFound, InvalidDataError
+from .exceptions import NotFound, InvalidDataError
 
 class UserServer:
     """User_Server model class"""
@@ -42,7 +42,7 @@ class UserServer:
     def get(cls, userserver):
         """Get a userserver by id
         Args:
-            - userserver (UserServer): Film object with the id attribute
+            - userserver (UserServer): UserServer object with the id attribute
         Returns:
             - UserServer: UserServer object
         """
@@ -55,7 +55,7 @@ class UserServer:
         if result is not None:
             return cls(*result)
         
-        raise FilmNotFound(UserServer.id) #TABLA INTERMEDIA
+        raise NotFound(UserServer.id) #TABLA INTERMEDIA
     
     
     @classmethod
@@ -86,19 +86,6 @@ class UserServer:
       
         """
 
-        # Validaciones de datos de entrada, EJERCICIO N° 2
-        # if len(film.title) < 3:
-        #     raise InvalidDataError("Title must have at least three characters")
-        
-        # if not isinstance(film.language_id, int) or not isinstance(film.rental_duration, int):
-        #     raise InvalidDataError("Invalid data types for some attributes")
-        
-        # if film.special_features is not None and (not isinstance(film.special_features, list) \
-        #         or not all(isinstance(feature, str) for feature in film.special_features) \
-        #         or not all(feature in ["Trailers", "Commentaries", "Deleted Scenes", "Behind the Scenes"]
-        #                     for feature in film.special_features)):
-        #     raise InvalidDataError("Invalid special features")
-       
         
         # Construir la consulta SQL
         query = """INSERT INTO discord2.usuario_servidor (usuario_id, servidor_id, rol)
@@ -116,9 +103,7 @@ class UserServer:
             raise InvalidDataError("Failed to create tabla Usuario servidor")
         
 
-    # def exists(self):
-    #     # Verificar si el ID de la película existe en la base de datos
-    #     return Film.query.filter_by(film_id=self.film_id).first() is not None    
+   
 
     @classmethod
     def update(cls, userserver):
